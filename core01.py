@@ -21,7 +21,7 @@ def matrix_randomize(matrix):
     x, y = matrix.shape
     for i in range(x):
         for j in range(y):
-            matrix.A[i][j] = random.random()
+            matrix[i, j] = random.random()
 
 def fitness(matrix):
     """Returns the sum of all the values in matrix"""
@@ -29,7 +29,7 @@ def fitness(matrix):
     sum = 0
     for i in range(x):
         for j in range(y):
-            sum += matrix.A[i][j]
+            sum += matrix[i, j]
     return float(sum) / float(x * y)
 
 def matrix_perturb(matrix, probability):
@@ -39,7 +39,7 @@ def matrix_perturb(matrix, probability):
     for i in range(x):
         for j in range(y):
             if probability > random.random():
-                new_mat.A[i][j] = random.random()
+                new_mat[i, j] = random.random()
     return new_mat
 
 def plot_vector_as_line(genes):
@@ -54,7 +54,7 @@ def plot_vector_as_line(genes):
     for gen in range(0, 5000):
         fitness_array.append(parent_fitness)
         for i in range(50):
-            genes.A[i][gen] = parent.A[0][i]
+            genes[i, gen] = parent.A[0][i]
         child = matrix_perturb(parent, 0.05)
         child_fitness = fitness(child)
 
